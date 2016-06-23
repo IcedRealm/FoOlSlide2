@@ -1285,6 +1285,25 @@ class Chapter extends DataMapper
 		// Just remove everything after the page segment and readd it with proper number.
 		return substr(current_url(), 0, $post) . '/page/' . ($page + 1);
 	}
+	
+	/**
+   * Returns the URL for the prev page in the same chapter. 
+   */
+  
+        public function prev_page($page, $max = 0)
+        {
+		if ($max != 0 && $max > $page)
+			return $this->prev();
+
+		$url = current_url();
+		// If the page hasn't been set yet, just add to the URL.
+		if (!$post = strpos($url, '/page'))
+		{
+			return current_url() . 'page/' . ($page - 1);
+		}
+		// Just remove everything after the page segment and readd it with proper number.
+		return substr(current_url(), 0, $post) . '/page/' . ($page - 1);
+        }
 
 
 	/**
